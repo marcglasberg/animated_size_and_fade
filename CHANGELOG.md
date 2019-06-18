@@ -2,3 +2,7 @@
 
 * Initial. 
 
+## [1.0.1] - 18/06/2019
+
+* Added example.
+
