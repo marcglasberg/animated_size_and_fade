@@ -2,7 +2,7 @@ name: animated_size_and_fade
 description: A widget that does a fade and size transition between widgets of same width but different heights,
   and you don't need to know their sizes in advance.
 
-version: 1.0.1
+version: 1.0.3
 author: Marcelo Glasberg <marcglasberg@gmail.com>
 homepage: https://github.com/marcglasberg/animated_size_and_fade
 
