@@ -1,3 +1,5 @@
+[![pub package](https://img.shields.io/pub/v/animated_size_and_fade.svg)](https://pub.dartlang.org/packages/animated_size_and_fade)
+
 # animated_size_and_fade
 
 A widget that does a fade and size transition between a "new" widget and the "old "widget
@@ -59,7 +61,8 @@ Then, import it:
 * <a href="https://pub.dev/packages/indexed_list_view">indexed_list_view</a> 
 * <a href="https://pub.dev/packages/animated_size_and_fade">animated_size_and_fade</a>
 
----<br>_https://github.com/marcglasberg_<br>
+<br>_Marcelo Glasberg:_<br>
+_https://github.com/marcglasberg_<br>
 _https://twitter.com/glasbergmarcelo_<br>
 _https://stackoverflow.com/users/3411681/marcg_<br>
 _https://medium.com/@marcglasberg_<br>
