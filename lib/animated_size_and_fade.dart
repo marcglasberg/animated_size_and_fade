@@ -5,27 +5,42 @@ import 'package:flutter/scheduler.dart';
 // DEVELOPED BY MARCELO GLASBERG 2018.
 // See: https://stackoverflow.com/questions/51736663/in-flutter-how-can-i-change-some-widget-and-see-it-animate-to-its-new-size/
 
-/// A widget that does a fade and size transition between a "new" widget and the "old "widget
-/// previously set as a child. The "old" and the "new" child must have the same width,
-/// but can have different heights.
+/// The `AnimatedSizeAndFade` widget does a fade and size transition between a "new" widget and
+/// an "old" widget/ previously set as a child. The "old" and the "new" children must have the
+/// same width, but can have different heights, and you **don't need to know** their sizes in
+/// advance. You can also define a duration and curve for both the fade and the size, separately.
 ///
-/// You can also define a duration and curve for both the fade and the size, separately.
-///
-/// Important: If the "new" child is the same widget type as the "old" child, but with different
-/// parameters, then [AnimatedSizeAndFade] will NOT do a transition between them, since as far as
+/// **Important:** If the "new" child is the same widget type as the "old" child, but with different
+/// parameters, then [AnimatedSizeAndFade] will **NOT** do a transition between them, since as far as
 /// the framework is concerned, they are the same widget, and the existing widget can be updated
 /// with the new parameters. To force the transition to occur, set a [Key] (typically a [ValueKey]
 /// taking any widget data that would change the visual appearance of the widget) on each child
 /// widget that you wish to be considered unique.
 ///
-/// ## Use it like this:
+/// Example:
+/// ```
+///  bool toggle=true;
+///  Widget widget1 = ...;
+///  Widget widget2 = ...;
+///  AnimatedSizeAndFade(
+///     vsync: this,
+///     child: toggle ? widget1 : widget2
+///  );
+/// ```
 ///
+/// ### Show and Hide
+///
+/// The `AnimatedSizeAndFade.toggle` constructor may be used to show/hide a widget, by resizing it vertically while fading.
+///
+/// Example:
 /// ```
-/// bool toggle=true;
-/// Widget widget1 = ...;
-/// Widget widget2 = ...;
-/// AnimatedSizeAndFade(vsync: this, child: toggle ? widget1 : widget2)
-/// ```
+///  bool toggle=true;
+///  Widget widget = ...;
+///  AnimatedSizeAndFade.showHide(
+///     vsync: this,
+///     show: toggle,
+///     child: widget,
+///  );
 ///
 /// ## How does AnimatedSizeAndFade compare to other similar widgets?
 ///
@@ -38,6 +53,8 @@ import 'package:flutter/scheduler.dart';
 /// - AnimatedContainer also doesn't work unless you know the size of the children in advance.
 ///
 class AnimatedSizeAndFade extends StatelessWidget {
+  static final _key = UniqueKey();
+
   final Widget child;
   final TickerProvider vsync;
   final Duration fadeDuration;
@@ -45,6 +62,7 @@ class AnimatedSizeAndFade extends StatelessWidget {
   final Curve fadeCurve;
   final Curve sizeCurve;
   final Alignment alignment;
+  final bool show;
 
   AnimatedSizeAndFade({
     Key key,
@@ -55,14 +73,46 @@ class AnimatedSizeAndFade extends StatelessWidget {
     this.fadeCurve = Curves.easeInOut,
     this.sizeCurve = Curves.easeInOut,
     this.alignment = Alignment.center,
-  }) : super(key: key);
+  })  : show = null,
+        assert(vsync != null),
+        assert(fadeDuration != null),
+        assert(sizeDuration != null),
+        assert(fadeCurve != null),
+        assert(sizeCurve != null),
+        assert(alignment != null),
+        super(key: key);
+
+  /// Use this constructor when you want to show/hide the child, by doing a
+  /// vertical size/fade. To that end, instead of changing the child,
+  /// simply change [show]. Note this widget will try to have its width as
+  /// big as possible, so put it in a parent with limited width constraints.
+  AnimatedSizeAndFade.showHide({
+    Key key,
+    this.child,
+    @required this.show,
+    @required this.vsync,
+    this.fadeDuration = const Duration(milliseconds: 500),
+    this.sizeDuration = const Duration(milliseconds: 500),
+    this.fadeCurve = Curves.easeInOut,
+    this.sizeCurve = Curves.easeInOut,
+    this.alignment = Alignment.center,
+  })  : assert(show != null),
+        assert(vsync != null),
+        assert(fadeDuration != null),
+        assert(sizeDuration != null),
+        assert(fadeCurve != null),
+        assert(sizeCurve != null),
+        assert(alignment != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var animatedSize = AnimatedSize(
       vsync: vsync,
       child: AnimatedSwitcher(
-        child: child,
+        child: (show == null || show)
+            ? child
+            : Container(key: _key, width: double.infinity, height: 0),
         duration: fadeDuration,
         layoutBuilder: _layoutBuilder,
       ),

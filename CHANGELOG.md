@@ -1,8 +1,13 @@
-## [1.0.0] - 2019/06/17
+## [1.0.5] - 2019/10/18
 
-* Initial. 
+* Toggle constructor (to show/hide).
 
 ## [1.0.3] - 2019/06/18
 
 * Added example.
+ 
+## [1.0.0] - 2019/06/17
+
+* Initial. 
+
 

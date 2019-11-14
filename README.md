@@ -2,9 +2,16 @@
 
 # animated_size_and_fade
 
-A widget that does a fade and size transition between a "new" widget and the "old "widget
-previously set as a child. The "old" and the "new" child must have the same width,
-but can have different heights, and you don't need to know their sizes in advance.
+This allows you to:
+ 
+1. Do a **fade and size transition** between two widgets.
+2. **Show and hide** a widget, by resizing it vertically while fading. 
+
+### Fade and Size 
+
+The `AnimatedSizeAndFade` widget does a fade and size transition between a "new" widget and an "old" widget
+previously set as a child. The "old" and the "new" children must have the same width,
+but can have different heights, and you **don't need to know** their sizes in advance.
 
 You can also define a duration and curve for both the fade and the size, separately.
 
@@ -13,11 +20,9 @@ parameters, then [AnimatedSizeAndFade] will **NOT** do a transition between them
 the framework is concerned, they are the same widget, and the existing widget can be updated
 with the new parameters. To force the transition to occur, set a [Key] (typically a [ValueKey]
 taking any widget data that would change the visual appearance of the widget) on each child
-widget that you wish to be considered unique.
- 
-**Note:** This is the StackOverflow question that prompted this widget development: https://stackoverflow.com/questions/51736663/in-flutter-how-can-i-change-some-widget-and-see-it-animate-to-its-new-size/ 
+widget that you wish to be considered unique.  
 
-### Use it like this:
+Example:
   
     bool toggle=true;
     Widget widget1 = ...;
@@ -27,9 +32,25 @@ widget that you wish to be considered unique.
        vsync: this, 
        child: toggle ? widget1 : widget2
     );
+ 
+
+### Show and Hide 
+
+The `AnimatedSizeAndFade.toggle` constructor may be used to show/hide a widget, by resizing it vertically while fading. 
+
+Example:
+  
+    bool toggle=true;
+    Widget widget = ...;    
+    
+    AnimatedSizeAndFade.showHide(
+       vsync: this, 
+       show: toggle,
+       child: widget,
+    );
            
            
-### How does AnimatedSizeAndFade compare to other similar widgets?
+## How does it compare to other similar widgets?
 
 - With `AnimatedCrossFade` you must keep both the firstChild and secondChild, which is not
 necessary with `AnimatedSizeAndFade`.
@@ -39,21 +60,16 @@ the fade, not the size.
 
 - `AnimatedContainer` also doesn't work unless you know the size of the children in advance.
 
+***
 
-## Usage
-
-### Import the package
-
-First, add animated_size_and_fade [as a dependency](https://pub.dartlang.org/packages/animated_size_and_fade#-installing-tab-) in your pubspec.yaml
-
-Then, import it:
-
-    import 'package:animated_size_and_fade/animated_size_and_fade.dart';
+Note: See the [StackOverflow question](https://stackoverflow.com/questions/51736663/in-flutter-how-can-i-change-some-widget-and-see-it-animate-to-its-new-size/) that prompted this widget development.
 
 ***
 
 *The Flutter packages I've authored:* 
 * <a href="https://pub.dev/packages/async_redux">async_redux</a>
+* <a href="https://pub.dev/packages/provider_for_redux">provider_for_redux</a>
+* <a href="https://pub.dev/packages/i18n_extension">i18n_extension</a>
 * <a href="https://pub.dev/packages/align_positioned">align_positioned</a>
 * <a href="https://pub.dev/packages/network_to_file_image">network_to_file_image</a>
 * <a href="https://pub.dev/packages/matrix4_transform">matrix4_transform</a> 
