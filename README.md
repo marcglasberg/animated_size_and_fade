@@ -7,7 +7,9 @@ This allows you to:
 1. Do a **fade and size transition** between two widgets.
 2. **Show and hide** a widget, by resizing it vertically while fading. 
 
-### Fade and Size 
+<img src="https://github.com/marcglasberg/animated_size_and_fade/blob/master/example/lib/animated_size_and_fade.gif" width="280">
+
+### Size and Fade 
 
 The `AnimatedSizeAndFade` widget does a fade and size transition between a "new" widget and an "old" widget
 previously set as a child. The "old" and the "new" children must have the same width,
@@ -16,9 +18,9 @@ but can have different heights, and you **don't need to know** their sizes in ad
 You can also define a duration and curve for both the fade and the size, separately.
 
 **Important:** If the "new" child is the same widget type as the "old" child, but with different
-parameters, then [AnimatedSizeAndFade] will **NOT** do a transition between them, since as far as
+parameters, then `AnimatedSizeAndFade` will **NOT** do a transition between them, since as far as
 the framework is concerned, they are the same widget, and the existing widget can be updated
-with the new parameters. To force the transition to occur, set a [Key] (typically a [ValueKey]
+with the new parameters. To force the transition to occur, set a `Key` (typically a `ValueKey`
 taking any widget data that would change the visual appearance of the widget) on each child
 widget that you wish to be considered unique.  
 

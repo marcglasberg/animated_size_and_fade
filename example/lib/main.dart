@@ -39,9 +39,11 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       color: Colors.blue,
       width: 200.0,
       child: const Text(
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt "
-            "ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation "
-            "ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "And I promise you I'll never desert you again because after 'Salome' "
+        "we'll make another picture and another picture. "
+        "You see, this is my life! "
+        "It always will be! Nothing else! "
+        "Just us, the cameras, and those wonderful people out there in the dark!...",
       ),
     );
 

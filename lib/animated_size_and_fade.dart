@@ -59,7 +59,8 @@ class AnimatedSizeAndFade extends StatelessWidget {
   final TickerProvider vsync;
   final Duration fadeDuration;
   final Duration sizeDuration;
-  final Curve fadeCurve;
+  final Curve fadeInCurve;
+  final Curve fadeOutCurve;
   final Curve sizeCurve;
   final Alignment alignment;
   final bool show;
@@ -70,14 +71,16 @@ class AnimatedSizeAndFade extends StatelessWidget {
     @required this.vsync,
     this.fadeDuration = const Duration(milliseconds: 500),
     this.sizeDuration = const Duration(milliseconds: 500),
-    this.fadeCurve = Curves.easeInOut,
+    this.fadeInCurve = Curves.easeInOut,
+    this.fadeOutCurve = Curves.easeInOut,
     this.sizeCurve = Curves.easeInOut,
     this.alignment = Alignment.center,
   })  : show = null,
         assert(vsync != null),
         assert(fadeDuration != null),
         assert(sizeDuration != null),
-        assert(fadeCurve != null),
+        assert(fadeInCurve != null),
+        assert(fadeOutCurve != null),
         assert(sizeCurve != null),
         assert(alignment != null),
         super(key: key);
@@ -93,14 +96,16 @@ class AnimatedSizeAndFade extends StatelessWidget {
     @required this.vsync,
     this.fadeDuration = const Duration(milliseconds: 500),
     this.sizeDuration = const Duration(milliseconds: 500),
-    this.fadeCurve = Curves.easeInOut,
+    this.fadeInCurve = Curves.easeInOut,
+    this.fadeOutCurve = Curves.easeInOut,
     this.sizeCurve = Curves.easeInOut,
     this.alignment = Alignment.center,
   })  : assert(show != null),
         assert(vsync != null),
         assert(fadeDuration != null),
         assert(sizeDuration != null),
-        assert(fadeCurve != null),
+        assert(fadeInCurve != null),
+        assert(fadeOutCurve != null),
         assert(sizeCurve != null),
         assert(alignment != null),
         super(key: key);
@@ -109,18 +114,20 @@ class AnimatedSizeAndFade extends StatelessWidget {
   Widget build(BuildContext context) {
     var animatedSize = AnimatedSize(
       vsync: vsync,
+      duration: sizeDuration,
+      curve: sizeCurve,
       child: AnimatedSwitcher(
         child: (show == null || show)
             ? child
             : Container(key: _key, width: double.infinity, height: 0),
         duration: fadeDuration,
+        switchInCurve: fadeInCurve,
+        switchOutCurve: fadeOutCurve,
         layoutBuilder: _layoutBuilder,
       ),
-      duration: sizeDuration,
-      curve: Curves.easeInOut,
     );
 
-    return ClipPath(child: animatedSize);
+    return ClipRect(child: animatedSize);
   }
 
   Widget _layoutBuilder(Widget currentChild, List<Widget> previousChildren) {
