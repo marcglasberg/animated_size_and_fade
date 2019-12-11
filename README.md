@@ -7,7 +7,7 @@ This allows you to:
 1. Do a **fade and size transition** between two widgets.
 2. **Show and hide** a widget, by resizing it vertically while fading. 
 
-<img src="https://github.com/marcglasberg/animated_size_and_fade/blob/master/example/lib/animated_size_and_fade.gif" width="280">
+<img src="https://github.com/marcglasberg/animated_size_and_fade/blob/master/example/lib/animated_size_and_fade.gif?raw=true" width="280">
 
 ### Size and Fade 
 
