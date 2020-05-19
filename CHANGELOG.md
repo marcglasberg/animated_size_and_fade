@@ -1,3 +1,7 @@
+## [1.1.1] - 2020/05/19
+
+* Docs improvement.
+
 ## [1.1.0] - 2019/11/29
 
 * Breaking change: 2 curves for fading in/out.
