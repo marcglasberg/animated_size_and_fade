@@ -38,7 +38,8 @@ Example:
 
 ### Show and Hide 
 
-The `AnimatedSizeAndFade.toggle` constructor may be used to show/hide a widget, by resizing it vertically while fading. 
+The `AnimatedSizeAndFade.showHide` constructor may be used to show/hide a widget, 
+by resizing it vertically while fading. 
 
 Example:
   
