@@ -31,7 +31,7 @@ Example:
     Widget widget2 = ...;
     
     AnimatedSizeAndFade(
-       vsync: this, 
+       vsync: this, // the current instance needs to have the TickerProviderStateMixin
        child: toggle ? widget1 : widget2
     );
  
@@ -47,7 +47,7 @@ Example:
     Widget widget = ...;    
     
     AnimatedSizeAndFade.showHide(
-       vsync: this, 
+       vsync: this, // the current instance needs to have the TickerProviderStateMixin
        show: toggle,
        child: widget,
     );
