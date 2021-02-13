@@ -56,7 +56,7 @@ import 'package:flutter/scheduler.dart';
 class AnimatedSizeAndFade extends StatelessWidget {
   static final _key = UniqueKey();
 
-  final Widget child;
+  final Widget? child;
   final TickerProvider vsync;
   final Duration fadeDuration;
   final Duration sizeDuration;
@@ -67,23 +67,16 @@ class AnimatedSizeAndFade extends StatelessWidget {
   final bool show;
 
   AnimatedSizeAndFade({
-    Key key,
+    Key? key,
     this.child,
-    @required this.vsync,
+    required this.vsync,
     this.fadeDuration = const Duration(milliseconds: 500),
     this.sizeDuration = const Duration(milliseconds: 500),
     this.fadeInCurve = Curves.easeInOut,
     this.fadeOutCurve = Curves.easeInOut,
     this.sizeCurve = Curves.easeInOut,
     this.alignment = Alignment.center,
-  })  : show = null,
-        assert(vsync != null),
-        assert(fadeDuration != null),
-        assert(sizeDuration != null),
-        assert(fadeInCurve != null),
-        assert(fadeOutCurve != null),
-        assert(sizeCurve != null),
-        assert(alignment != null),
+  })  : show = true,
         super(key: key);
 
   /// Use this constructor when you want to show/hide the child, by doing a
@@ -91,25 +84,17 @@ class AnimatedSizeAndFade extends StatelessWidget {
   /// simply change [show]. Note this widget will try to have its width as
   /// big as possible, so put it in a parent with limited width constraints.
   AnimatedSizeAndFade.showHide({
-    Key key,
+    Key? key,
     this.child,
-    @required this.show,
-    @required this.vsync,
+    required this.show,
+    required this.vsync,
     this.fadeDuration = const Duration(milliseconds: 500),
     this.sizeDuration = const Duration(milliseconds: 500),
     this.fadeInCurve = Curves.easeInOut,
     this.fadeOutCurve = Curves.easeInOut,
     this.sizeCurve = Curves.easeInOut,
     this.alignment = Alignment.center,
-  })  : assert(show != null),
-        assert(vsync != null),
-        assert(fadeDuration != null),
-        assert(sizeDuration != null),
-        assert(fadeInCurve != null),
-        assert(fadeOutCurve != null),
-        assert(sizeCurve != null),
-        assert(alignment != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -118,9 +103,13 @@ class AnimatedSizeAndFade extends StatelessWidget {
       duration: sizeDuration,
       curve: sizeCurve,
       child: AnimatedSwitcher(
-        child: (show == null || show)
+        child: show
             ? child
-            : Container(key: _key, width: double.infinity, height: 0),
+            : Container(
+                key: _key,
+                width: double.infinity,
+                height: 0,
+              ),
         duration: fadeDuration,
         switchInCurve: fadeInCurve,
         switchOutCurve: fadeOutCurve,
@@ -131,11 +120,11 @@ class AnimatedSizeAndFade extends StatelessWidget {
     return ClipRect(child: animatedSize);
   }
 
-  Widget _layoutBuilder(Widget currentChild, List<Widget> previousChildren) {
+  Widget _layoutBuilder(Widget? currentChild, List<Widget> previousChildren) {
     List<Widget> children = previousChildren;
 
     if (currentChild != null) {
-      if (previousChildren == null || previousChildren.isEmpty)
+      if (previousChildren.isEmpty)
         children = [currentChild];
       else {
         children = [
@@ -154,7 +143,7 @@ class AnimatedSizeAndFade extends StatelessWidget {
     }
 
     return Stack(
-      overflow: Overflow.visible,
+      clipBehavior: Clip.none,
       children: children,
       alignment: alignment,
     );
