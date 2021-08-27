@@ -1,3 +1,7 @@
+## [2.1.0] - 2020/08/27
+
+* The vsync parameter is now optional.
+
 ## [2.0.0] - 2020/03/05
 
 * Nullsafe version.
@@ -25,7 +29,7 @@
 ## [1.0.3] - 2019/06/18
 
 * Added example.
- 
+
 ## [1.0.0] - 2019/06/17
 
 * Initial. 

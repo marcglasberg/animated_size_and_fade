@@ -10,7 +10,7 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
+class _MyAppState extends State<MyApp> {
   late bool toggle;
 
   @override
@@ -68,7 +68,6 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
               children: <Widget>[
                 const Text("Some text above."),
                 AnimatedSizeAndFade(
-                  vsync: this,
                   child: toggle ? widget1 : widget2,
                   fadeDuration: const Duration(milliseconds: 300),
                   sizeDuration: const Duration(milliseconds: 600),

@@ -53,11 +53,11 @@ import 'package:flutter/scheduler.dart';
 ///
 /// - AnimatedContainer also doesn't work unless you know the size of the children in advance.
 ///
-class AnimatedSizeAndFade extends StatelessWidget {
+class AnimatedSizeAndFade extends StatefulWidget {
   static final _key = UniqueKey();
 
   final Widget? child;
-  final TickerProvider vsync;
+  final TickerProvider? vsync;
   final Duration fadeDuration;
   final Duration sizeDuration;
   final Curve fadeInCurve;
@@ -69,7 +69,7 @@ class AnimatedSizeAndFade extends StatelessWidget {
   AnimatedSizeAndFade({
     Key? key,
     this.child,
-    required this.vsync,
+    this.vsync,
     this.fadeDuration = const Duration(milliseconds: 500),
     this.sizeDuration = const Duration(milliseconds: 500),
     this.fadeInCurve = Curves.easeInOut,
@@ -87,7 +87,7 @@ class AnimatedSizeAndFade extends StatelessWidget {
     Key? key,
     this.child,
     required this.show,
-    required this.vsync,
+    this.vsync,
     this.fadeDuration = const Duration(milliseconds: 500),
     this.sizeDuration = const Duration(milliseconds: 500),
     this.fadeInCurve = Curves.easeInOut,
@@ -97,22 +97,31 @@ class AnimatedSizeAndFade extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State createState() {
+    return (vsync == null) ? _AnimatedSizeAndFadeState1() : _AnimatedSizeAndFadeState2();
+  }
+}
+
+// /////////////////////////////////////////////////////////////////////////////////////////////////
+
+class _AnimatedSizeAndFadeState1 extends State<AnimatedSizeAndFade> with TickerProviderStateMixin {
+  @override
   Widget build(BuildContext context) {
     var animatedSize = AnimatedSize(
-      vsync: vsync,
-      duration: sizeDuration,
-      curve: sizeCurve,
+      vsync: this,
+      duration: widget.sizeDuration,
+      curve: widget.sizeCurve,
       child: AnimatedSwitcher(
-        child: show
-            ? child
+        child: widget.show
+            ? widget.child
             : Container(
-                key: _key,
+                key: AnimatedSizeAndFade._key,
                 width: double.infinity,
                 height: 0,
               ),
-        duration: fadeDuration,
-        switchInCurve: fadeInCurve,
-        switchOutCurve: fadeOutCurve,
+        duration: widget.fadeDuration,
+        switchInCurve: widget.fadeInCurve,
+        switchOutCurve: widget.fadeOutCurve,
         layoutBuilder: _layoutBuilder,
       ),
     );
@@ -145,7 +154,66 @@ class AnimatedSizeAndFade extends StatelessWidget {
     return Stack(
       clipBehavior: Clip.none,
       children: children,
-      alignment: alignment,
+      alignment: widget.alignment,
     );
   }
 }
+
+// /////////////////////////////////////////////////////////////////////////////////////////////////
+
+class _AnimatedSizeAndFadeState2 extends State<AnimatedSizeAndFade> {
+  @override
+  Widget build(BuildContext context) {
+    var animatedSize = AnimatedSize(
+      vsync: widget.vsync!,
+      duration: widget.sizeDuration,
+      curve: widget.sizeCurve,
+      child: AnimatedSwitcher(
+        child: widget.show
+            ? widget.child
+            : Container(
+                key: AnimatedSizeAndFade._key,
+                width: double.infinity,
+                height: 0,
+              ),
+        duration: widget.fadeDuration,
+        switchInCurve: widget.fadeInCurve,
+        switchOutCurve: widget.fadeOutCurve,
+        layoutBuilder: _layoutBuilder,
+      ),
+    );
+
+    return ClipRect(child: animatedSize);
+  }
+
+  Widget _layoutBuilder(Widget? currentChild, List<Widget> previousChildren) {
+    List<Widget> children = previousChildren;
+
+    if (currentChild != null) {
+      if (previousChildren.isEmpty)
+        children = [currentChild];
+      else {
+        children = [
+          Positioned(
+            left: 0.0,
+            right: 0.0,
+            child: Container(
+              child: previousChildren[0],
+            ),
+          ),
+          Container(
+            child: currentChild,
+          ),
+        ];
+      }
+    }
+
+    return Stack(
+      clipBehavior: Clip.none,
+      children: children,
+      alignment: widget.alignment,
+    );
+  }
+}
+
+// /////////////////////////////////////////////////////////////////////////////////////////////////
