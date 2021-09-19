@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/scheduler.dart';
 
 // DEVELOPED BY MARCELO GLASBERG 2018.
 // See: https://stackoverflow.com/questions/51736663/in-flutter-how-can-i-change-some-widget-and-see-it-animate-to-its-new-size/
@@ -23,7 +22,6 @@ import 'package:flutter/scheduler.dart';
 ///  Widget widget1 = ...;
 ///  Widget widget2 = ...;
 ///  AnimatedSizeAndFade(
-///     vsync: this,
 ///     child: toggle ? widget1 : widget2
 ///  );
 /// ```
@@ -38,7 +36,6 @@ import 'package:flutter/scheduler.dart';
 ///  bool toggle=true;
 ///  Widget widget = ...;
 ///  AnimatedSizeAndFade.showHide(
-///     vsync: this,
 ///     show: toggle,
 ///     child: widget,
 ///  );
@@ -53,11 +50,10 @@ import 'package:flutter/scheduler.dart';
 ///
 /// - AnimatedContainer also doesn't work unless you know the size of the children in advance.
 ///
-class AnimatedSizeAndFade extends StatefulWidget {
+class AnimatedSizeAndFade extends StatelessWidget {
   static final _key = UniqueKey();
 
   final Widget? child;
-  final TickerProvider? vsync;
   final Duration fadeDuration;
   final Duration sizeDuration;
   final Curve fadeInCurve;
@@ -69,7 +65,6 @@ class AnimatedSizeAndFade extends StatefulWidget {
   AnimatedSizeAndFade({
     Key? key,
     this.child,
-    this.vsync,
     this.fadeDuration = const Duration(milliseconds: 500),
     this.sizeDuration = const Duration(milliseconds: 500),
     this.fadeInCurve = Curves.easeInOut,
@@ -87,7 +82,6 @@ class AnimatedSizeAndFade extends StatefulWidget {
     Key? key,
     this.child,
     required this.show,
-    this.vsync,
     this.fadeDuration = const Duration(milliseconds: 500),
     this.sizeDuration = const Duration(milliseconds: 500),
     this.fadeInCurve = Curves.easeInOut,
@@ -97,31 +91,21 @@ class AnimatedSizeAndFade extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State createState() {
-    return (vsync == null) ? _AnimatedSizeAndFadeState1() : _AnimatedSizeAndFadeState2();
-  }
-}
-
-// /////////////////////////////////////////////////////////////////////////////////////////////////
-
-class _AnimatedSizeAndFadeState1 extends State<AnimatedSizeAndFade> with TickerProviderStateMixin {
-  @override
   Widget build(BuildContext context) {
     var animatedSize = AnimatedSize(
-      vsync: this,
-      duration: widget.sizeDuration,
-      curve: widget.sizeCurve,
+      duration: sizeDuration,
+      curve: sizeCurve,
       child: AnimatedSwitcher(
-        child: widget.show
-            ? widget.child
+        child: show
+            ? child
             : Container(
                 key: AnimatedSizeAndFade._key,
                 width: double.infinity,
                 height: 0,
               ),
-        duration: widget.fadeDuration,
-        switchInCurve: widget.fadeInCurve,
-        switchOutCurve: widget.fadeOutCurve,
+        duration: fadeDuration,
+        switchInCurve: fadeInCurve,
+        switchOutCurve: fadeOutCurve,
         layoutBuilder: _layoutBuilder,
       ),
     );
@@ -140,13 +124,9 @@ class _AnimatedSizeAndFadeState1 extends State<AnimatedSizeAndFade> with TickerP
           Positioned(
             left: 0.0,
             right: 0.0,
-            child: Container(
-              child: previousChildren[0],
-            ),
+            child: Container(child: previousChildren[0]),
           ),
-          Container(
-            child: currentChild,
-          ),
+          Container(child: currentChild),
         ];
       }
     }
@@ -154,64 +134,7 @@ class _AnimatedSizeAndFadeState1 extends State<AnimatedSizeAndFade> with TickerP
     return Stack(
       clipBehavior: Clip.none,
       children: children,
-      alignment: widget.alignment,
-    );
-  }
-}
-
-// /////////////////////////////////////////////////////////////////////////////////////////////////
-
-class _AnimatedSizeAndFadeState2 extends State<AnimatedSizeAndFade> {
-  @override
-  Widget build(BuildContext context) {
-    var animatedSize = AnimatedSize(
-      vsync: widget.vsync!,
-      duration: widget.sizeDuration,
-      curve: widget.sizeCurve,
-      child: AnimatedSwitcher(
-        child: widget.show
-            ? widget.child
-            : Container(
-                key: AnimatedSizeAndFade._key,
-                width: double.infinity,
-                height: 0,
-              ),
-        duration: widget.fadeDuration,
-        switchInCurve: widget.fadeInCurve,
-        switchOutCurve: widget.fadeOutCurve,
-        layoutBuilder: _layoutBuilder,
-      ),
-    );
-
-    return ClipRect(child: animatedSize);
-  }
-
-  Widget _layoutBuilder(Widget? currentChild, List<Widget> previousChildren) {
-    List<Widget> children = previousChildren;
-
-    if (currentChild != null) {
-      if (previousChildren.isEmpty)
-        children = [currentChild];
-      else {
-        children = [
-          Positioned(
-            left: 0.0,
-            right: 0.0,
-            child: Container(
-              child: previousChildren[0],
-            ),
-          ),
-          Container(
-            child: currentChild,
-          ),
-        ];
-      }
-    }
-
-    return Stack(
-      clipBehavior: Clip.none,
-      children: children,
-      alignment: widget.alignment,
+      alignment: alignment,
     );
   }
 }

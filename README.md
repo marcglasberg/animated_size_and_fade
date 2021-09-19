@@ -49,18 +49,6 @@ Example:
        child: widget,
     );
 
-## Advanced: providing vsync
-
-The `AnimatedSizeAndFade` widget creates its own `vsync`. However, if you want you can provide a
-`vsync` yourself. Extend a `StatefulWidget` with `TickerProviderStateMixin`, and then:
-
-```
-AnimatedSizeAndFade(vsync: this, child: toggle ? widget1 : widget2);
-AnimatedSizeAndFade.showHide(vsync: this, show: toggle, child: widget);
-```
-
-If you don't understand what I am talking about here, just ignore it. It's not important.
-
 ## How does it compare to other similar widgets?
 
 - With `AnimatedCrossFade` you must keep both the firstChild and secondChild, which is not necessary

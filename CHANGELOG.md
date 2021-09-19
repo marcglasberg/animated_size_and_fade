@@ -1,6 +1,10 @@
+## [3.0.0] - 2020/09/19
+
+* Breaking change: Remove the `vsync` parameter.
+
 ## [2.1.0] - 2020/08/27
 
-* The vsync parameter is now optional.
+* The `vsync` parameter is now optional.
 
 ## [2.0.0] - 2020/03/05
 
