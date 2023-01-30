@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 // DEVELOPED BY MARCELO GLASBERG 2018.
 // See: https://stackoverflow.com/questions/51736663/in-flutter-how-can-i-change-some-widget-and-see-it-animate-to-its-new-size/
@@ -117,18 +116,17 @@ class AnimatedSizeAndFade extends StatelessWidget {
     List<Widget> children = previousChildren;
 
     if (currentChild != null) {
-      if (previousChildren.isEmpty)
-        children = [currentChild];
-      else {
-        children = [
-          Positioned(
-            left: 0.0,
-            right: 0.0,
-            child: Container(child: previousChildren[0]),
-          ),
-          Container(child: currentChild),
-        ];
-      }
+      //
+      children = previousChildren.isEmpty
+          ? [currentChild]
+          : [
+              Positioned(
+                left: 0,
+                right: 0,
+                child: previousChildren[0],
+              ),
+              currentChild,
+            ];
     }
 
     return Stack(

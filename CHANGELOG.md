@@ -1,3 +1,7 @@
+## [3.0.1] - 2023/01/30
+
+* Removed useless `Container`.
+
 ## [3.0.0] - 2020/09/19
 
 * Breaking change: Remove the `vsync` parameter.
