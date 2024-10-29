@@ -1,6 +1,6 @@
 name: animated_size_and_fade
 description: Does a fade and size transition between widgets of different heights. Also used to show/hide a widget.
-version: 4.0.0
+version: 5.0.0
 # author: Marcelo Glasberg <marcglasberg@gmail.com>
 homepage: https://github.com/marcglasberg/animated_size_and_fade
 topics:
@@ -20,4 +20,3 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-

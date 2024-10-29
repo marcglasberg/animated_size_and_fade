@@ -1,49 +1,45 @@
-## [4.0.0] - 2024/01/24
+## 5.0.0
+
+* Sponsored by [MyText.ai](https://mytext.ai)
+
+[![](./example/SponsoredByMyTextAi.png)](https://mytext.ai)
+
+## 4.0.0
 
 * For Dart >=3.2.0
 
-## [3.0.1] - 2023/01/30
+## 3.0.1
 
 * Removed useless `Container`.
 
-## [3.0.0] - 2020/09/19
+## 3.0.0
 
 * Breaking change: Remove the `vsync` parameter.
 
-## [2.1.0] - 2020/08/27
+## 2.1.0
 
 * The `vsync` parameter is now optional.
 
-## [2.0.0] - 2020/03/05
+## 2.0.0
 
 * Nullsafe version.
 
-## [1.1.4] - 2020/09/14
+## 1.1.4
 
-* Docs improvement.
+* Doc improvements.
 
-## [1.1.2] - 2020/07/17
-
-* Docs improvement.
-
-## [1.1.1] - 2020/05/19
-
-* Docs improvement.
-
-## [1.1.0] - 2019/11/29
+## 1.1.0
 
 * Breaking change: 2 curves for fading in/out.
 
-## [1.0.5] - 2019/10/18
+## 1.0.5
 
 * Toggle constructor (to show/hide).
 
-## [1.0.3] - 2019/06/18
+## 1.0.3
 
 * Added example.
 
-## [1.0.0] - 2019/06/17
+## 1.0.0
 
 * Initial. 
-
-
