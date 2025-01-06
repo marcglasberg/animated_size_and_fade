@@ -1,10 +1,22 @@
-[![](./example/SponsoredByMyTextAi.png)](https://mytext.ai)
+[![Pub popularity](https://badgen.net/pub/popularity/animated_size_and_fade)](https://pub.dev/packages/animated_size_and_fade)
+[![Pub Version](https://img.shields.io/pub/v/animated_size_and_fade?style=flat-square&logo=dart)](https://pub.dev/packages/animated_size_and_fade)
+[![GitHub stars](https://img.shields.io/github/stars/marcglasberg/animated_size_and_fade?style=social)](https://github.com/marcglasberg/animated_size_and_fade)
+![Code Climate issues](https://img.shields.io/github/issues/marcglasberg/animated_size_and_fade?style=flat-square)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/marcglasberg/animated_size_and_fade?style=flat-square)
+![GitHub repo size](https://img.shields.io/github/repo-size/marcglasberg/animated_size_and_fade?style=flat-square)
+![GitHub forks](https://img.shields.io/github/forks/marcglasberg/animated_size_and_fade?style=flat-square)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)
+[![Developed by Marcelo Glasberg](https://img.shields.io/badge/Developed%20by%20Marcelo%20Glasberg-blue.svg)](https://glasberg.dev/)
+[![Glasberg.dev on pub.dev](https://img.shields.io/pub/publisher/animated_size_and_fade.svg)](https://pub.dev/publishers/glasberg.dev/packages)
+[![Platforms](https://badgen.net/pub/flutter-platform/animated_size_and_fade)](https://pub.dev/packages/animated_size_and_fade)
 
-[![pub package](https://img.shields.io/pub/v/animated_size_and_fade.svg)](https://pub.dartlang.org/packages/animated_size_and_fade)
+#### Sponsor
+
+[![](./example/SponsoredByMyTextAi.png)](https://mytext.ai)
 
 # animated_size_and_fade
 
-This allows you to:
+The `AnimatedSizeAndFade` widget allows you to:
 
 1. Do a **fade and size transition** between two widgets.
 2. **Show and hide** a widget, by resizing it vertically while fading.
@@ -13,9 +25,10 @@ This allows you to:
 
 ### Size and Fade
 
-The `AnimatedSizeAndFade` widget does a fade and size transition between a "new" widget and an "old"
-widget previously set as a child. The "old" and the "new" children must have the same width, but can
-have different heights, and you **don't need to know** their sizes in advance.
+To do a fade and size transition when you change the `child` widget, 
+the "old" and the "new" child must have the same width, 
+but can have different heights, 
+and you **don't need to know** their sizes in advance.
 
 You can also define a duration and curve for both the fade and the size, separately.
 
@@ -53,13 +66,13 @@ Example:
 
 ## How does it compare to other similar widgets?
 
-- With `AnimatedCrossFade` you must keep both the firstChild and secondChild, which is not necessary
-  with `AnimatedSizeAndFade`.
+- With `AnimatedCrossFade` you must provide both the _firstChild_ and _secondChild_ 
+  at the same time, but with `AnimatedSizeAndFade` you may simply change its child.
 
-- With `AnimatedSwitcher` you may simply change its child, but then it only animates the fade, not
-  the size.
+- With `AnimatedSwitcher` you may simply change its child, but then it only animates 
+  the fade, not the size.
 
-- `AnimatedContainer` also doesn't work unless you know the size of the children in advance.
+- `AnimatedContainer` only works if you know the size of the children in advance.
 
 ***
 
@@ -124,3 +137,5 @@ _stackoverflow.com/users/3411681/marcg_</a>
   (versions: <a href="https://habr.com/ru/post/500210/">русский</a>)
 * <a href="https://medium.com/flutter-community/the-new-way-to-create-themes-in-your-flutter-app-7fdfc4f3df5f">
   The New Way to create Themes in your Flutter App</a> 
+
+[![](./example/SponsoredByMyTextAi.png)](https://mytext.ai)
