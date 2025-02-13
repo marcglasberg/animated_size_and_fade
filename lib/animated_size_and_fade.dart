@@ -59,6 +59,7 @@ class AnimatedSizeAndFade extends StatelessWidget {
   final Curve fadeOutCurve;
   final Curve sizeCurve;
   final Alignment alignment;
+  final Clip clipBehavior;
   final bool show;
 
   AnimatedSizeAndFade({
@@ -70,6 +71,7 @@ class AnimatedSizeAndFade extends StatelessWidget {
     this.fadeOutCurve = Curves.easeInOut,
     this.sizeCurve = Curves.easeInOut,
     this.alignment = Alignment.center,
+    this.clipBehavior = Clip.hardEdge,
   })  : show = true,
         super(key: key);
 
@@ -87,11 +89,13 @@ class AnimatedSizeAndFade extends StatelessWidget {
     this.fadeOutCurve = Curves.easeInOut,
     this.sizeCurve = Curves.easeInOut,
     this.alignment = Alignment.center,
+    this.clipBehavior = Clip.hardEdge,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var animatedSize = AnimatedSize(
+      clipBehavior: clipBehavior,
       duration: sizeDuration,
       curve: sizeCurve,
       child: AnimatedSwitcher(

@@ -1,8 +1,10 @@
-## 5.0.3
-
 * Sponsored by [MyText.ai](https://mytext.ai)
 
 [![](./example/SponsoredByMyTextAi.png)](https://mytext.ai)
+
+## 5.1.0
+
+* Added parameter `clipBehavior`.
 
 ## 4.0.0
 
