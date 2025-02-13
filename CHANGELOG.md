@@ -2,7 +2,7 @@
 
 [![](./example/SponsoredByMyTextAi.png)](https://mytext.ai)
 
-## 5.1.0
+## 5.1.1
 
 * Added parameter `clipBehavior`.
 
