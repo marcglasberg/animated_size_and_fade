@@ -65,6 +65,7 @@ class AnimatedSizeAndFade extends StatelessWidget {
   final Alignment alignment;
   final Clip clipBehavior;
   final bool show;
+  final void Function()? onEnd;
 
   AnimatedSizeAndFade({
     Key? key,
@@ -76,6 +77,7 @@ class AnimatedSizeAndFade extends StatelessWidget {
     this.sizeCurve = Curves.easeInOut,
     this.alignment = Alignment.center,
     this.clipBehavior = Clip.hardEdge,
+    this.onEnd,
   })  : show = true,
         super(key: key);
 
@@ -94,6 +96,7 @@ class AnimatedSizeAndFade extends StatelessWidget {
     this.sizeCurve = Curves.easeInOut,
     this.alignment = Alignment.center,
     this.clipBehavior = Clip.hardEdge,
+    this.onEnd,
   }) : super(key: key);
 
   @override
@@ -115,6 +118,7 @@ class AnimatedSizeAndFade extends StatelessWidget {
         switchOutCurve: fadeOutCurve,
         layoutBuilder: _layoutBuilder,
       ),
+      onEnd: onEnd,
     );
 
     return ClipRect(
