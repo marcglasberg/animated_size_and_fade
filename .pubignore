@@ -1,18 +1,16 @@
+# Preserve the existing publish exclusions explicitly. The checked-in IDE
+# project stays in the repository but is not part of the published package.
 .DS_Store
 .dart_tool/
-
 .packages
 .pub/
-
 build/
 ios/.generated/
 ios/Flutter/Generated.xcconfig
 ios/Runner/GeneratedPluginRegistrant.*
-
 .idea/
 *.iml
-!/animated_size_and_fade.iml
-example/ios/Flutter/ephemeral/
 pubspec.lock
 *.lock
 .flutter-plugins-dependencies
+example/ios/Flutter/ephemeral/
