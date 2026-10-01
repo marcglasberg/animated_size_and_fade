@@ -2,16 +2,12 @@
 
 [![](./example/SponsoredByMyTextAi.png)](https://mytext.ai)
 
-## 5.2.0
+## 6.0.0
 
 * Added optional `onFadeEnd`, `onSizeEnd`, and `onEnd` callbacks to both constructors.
   `onEnd` runs once after the current fade and size transition has finished.
-* Coordinated completion across unequal durations, interrupted transitions,
-  show/hide reversals, equal-size replacements, and zero-duration animations.
-  Callbacks run after layout and use the latest callback values.
-* Added regression tests for completion timing and widget lifecycle behavior.
-* Requires Flutter >=3.19.0 and Dart >=3.3.0. Applications on older SDKs should
-  continue using version 5.1.1.
+
+* BREAKING CHANGE: Requires Flutter >=3.19.0 and Dart >=3.3.0. 
 
 ## 5.1.1
 
