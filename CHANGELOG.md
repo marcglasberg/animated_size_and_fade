@@ -2,12 +2,12 @@
 
 [![](./example/SponsoredByMyTextAi.png)](https://mytext.ai)
 
-## 6.0.0
+## 5.1.2
 
 * Added optional `onFadeEnd`, `onSizeEnd`, and `onEnd` callbacks to both constructors.
   `onEnd` runs once after the current fade and size transition has finished.
 
-* BREAKING CHANGE: Requires Flutter >=3.19.0 and Dart >=3.3.0. 
+* Requires Flutter >=3.19.0 and Dart >=3.3.0. 
 
 ## 5.1.1
 
