@@ -33,11 +33,12 @@ and you **don't need to know** their sizes in advance.
 You can also define a duration and curve for both the fade and the size, separately.
 
 **Important:** If the "new" child is the same widget type as the "old" child, but with different
-parameters, then `AnimatedSizeAndFade` will **NOT** do a transition between them, since as far as
+parameters, then `AnimatedSizeAndFade` will **NOT** cross-fade between them, since as far as
 the framework is concerned, they are the same widget, and the existing widget can be updated with
 the new parameters. To force the transition to occur, set a `Key` (typically a `ValueKey`
 taking any widget data that would change the visual appearance of the widget) on each child widget
-that you wish to be considered unique.
+that you wish to be considered unique. Changes to the child's size still animate;
+the key is needed to force a cross-fade.
 
 Example:
 
@@ -63,6 +64,63 @@ Example:
        show: toggle,
        child: widget,
     );
+
+### Completion callbacks
+
+Both constructors accept three optional callbacks:
+
+| Callback | When it runs |
+| --- | --- |
+| `onFadeEnd` | After the current incoming fade and all remaining outgoing fades finish. |
+| `onSizeEnd` | After a changed target size settles and its size animation stops. |
+| `onEnd` | Once the current transition's fade and size are both finished. |
+
+The durations remain independent: a shorter fade can finish before the resize,
+and a shorter resize can finish before the fade. `onEnd` waits for both.
+A keyed replacement with the same size calls `onFadeEnd` and `onEnd`, but not
+`onSizeEnd`. A same-type, same-key child update that changes its height calls
+`onSizeEnd` and `onEnd`, but does not start a fade. Size changes inside the child
+are also observed without rebuilding `AnimatedSizeAndFade` itself.
+
+Initial layout and unchanged rebuilds do not call any callbacks. A part that
+does not change is already finished for purposes of `onEnd`. Changed parts with
+a zero duration still call their completion callbacks. Removing a nullable
+child can finish its fade before the resulting size change starts; `onEnd`
+still waits for that resize.
+
+When a transition is interrupted, `onEnd` belongs to the latest transition;
+it is not called for the abandoned transition. Completed component callbacks
+cannot be undone, but interrupted components do not report their old completion.
+If a child changes size again while a fade is still running, `onSizeEnd` can run
+again when the new size settles; `onEnd` waits for the final size and all fades.
+
+Callbacks run after layout and can call `setState`. When both components finish
+in the same frame, `onFadeEnd` runs before `onSizeEnd`. `onEnd` runs in the
+following frame, allowing a component callback to start a new transition or
+remove the widget first. Rebuilding with new callbacks uses the latest values
+without restarting the animations. Removing a callback does not replay it
+later, and disposing the widget cancels pending notifications.
+
+Example (inside a `State` object, with a `bool expanded` field):
+
+```dart
+AnimatedSizeAndFade.showHide(
+  show: expanded,
+  fadeDuration: const Duration(milliseconds: 200),
+  sizeDuration: const Duration(milliseconds: 400),
+  onFadeEnd: () => debugPrint('Fade finished'),
+  onSizeEnd: () => debugPrint('Resize finished'),
+  onEnd: () => debugPrint('Both finished'),
+  child: const SizedBox(
+    width: 200,
+    height: 120,
+    child: Center(child: Text('Details')),
+  ),
+);
+```
+
+Version 5.2.0 requires Flutter **3.19.0 or newer** and Dart **3.3.0 or newer**.
+Use version 5.1.1 with older SDKs.
 
 ## How does it compare to other similar widgets?
 
