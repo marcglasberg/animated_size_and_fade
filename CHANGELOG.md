@@ -2,7 +2,7 @@
 
 [![](./example/SponsoredByMyTextAi.png)](https://mytext.ai)
 
-## 5.1.2
+## 5.1.3
 
 * Added optional `onFadeEnd`, `onSizeEnd`, and `onEnd` callbacks to both constructors.
   `onEnd` runs once after the current fade and size transition has finished.

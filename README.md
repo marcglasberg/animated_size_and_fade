@@ -1,4 +1,3 @@
-[![Pub popularity](https://badgen.net/pub/popularity/animated_size_and_fade)](https://pub.dev/packages/animated_size_and_fade)
 [![Pub Version](https://img.shields.io/pub/v/animated_size_and_fade?style=flat-square&logo=dart)](https://pub.dev/packages/animated_size_and_fade)
 [![GitHub stars](https://img.shields.io/github/stars/marcglasberg/animated_size_and_fade?style=social)](https://github.com/marcglasberg/animated_size_and_fade)
 ![Code Climate issues](https://img.shields.io/github/issues/marcglasberg/animated_size_and_fade?style=flat-square)
