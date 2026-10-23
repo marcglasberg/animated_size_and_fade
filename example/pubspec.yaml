@@ -8,7 +8,7 @@ environment:
   flutter: '>=3.19.0'
 
 dependencies:
-  http: ^0.13.0
+  http: ^1.6.0
   animated_size_and_fade:
     path: ../
   flutter:
