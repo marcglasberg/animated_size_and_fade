@@ -1,5 +1,5 @@
 import 'package:animated_size_and_fade/animated_size_and_fade.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget _host({

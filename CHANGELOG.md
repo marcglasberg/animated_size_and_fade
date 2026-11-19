@@ -2,6 +2,10 @@
 
 [![](./example/SponsoredByMyTextAi.jpg)](https://mytext.ai)
 
+## 5.1.5
+
+* Use design-neutral Flutter widgets instead of the deprecated Material library, preserving animation and completion callback behavior.
+
 ## 5.1.4
 
 * Added optional `onFadeEnd`, `onSizeEnd`, and `onEnd` callbacks to both constructors.

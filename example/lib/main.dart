@@ -1,5 +1,5 @@
 import 'package:animated_size_and_fade/animated_size_and_fade.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   runApp(MyApp());
